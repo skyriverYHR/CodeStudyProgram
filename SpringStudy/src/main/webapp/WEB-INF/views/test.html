@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>实时表格管理 (带删除)</title>
+    <link rel="stylesheet" th:href="@{/static/css/primary.css}">
+</head>
+<body>
+<div id="camp_table">
+    <div id="header" class="clearFloat">
+        <div class="leftFloat header col-id">ID</div>
+        <div class="leftFloat header col-faction">Character_Faction</div>
+        <div class="leftFloat header col-action">操作</div>
+    </div>
+
+    <div id="context" class="clearFloat"></div>
+
+    <div id="insert" class="clearFloat">
+        <input type="text" id="inputId" placeholder="输入 ID">
+        <input type="text" id="inputFaction" placeholder="输入阵营">
+        <button onclick="addRow()">实时添加</button>
+    </div>
+</div>
+
+<script>
+    function addRow() {
+        const idVal = document.getElementById('inputId').value;
+        const factionVal = document.getElementById('inputFaction').value;
+
+        if (!idVal || !factionVal) {
+            alert("请填写完整信息");
+            return;
+        }
+
+        const rowWrapper = document.createElement('div');
+        rowWrapper.className = "clearFloat row-item";   //类名
+
+        // 动态生成包含删除按钮的 HTML
+        rowWrapper.innerHTML = `
+                <div class="leftFloat cell col-id">${idVal}</div>
+                <div class="leftFloat cell col-faction">${factionVal}</div>
+                <div class="leftFloat cell col-action">
+                    <button class="btn-del" onclick="deleteRow(this)">删除</button>
+                </div>
+            `;
+
+        document.getElementById('context').appendChild(rowWrapper);
+
+        // 重置输入框
+        document.getElementById('inputId').value = '';
+        document.getElementById('inputFaction').value = '';
+    }
+
+    // 删除逻辑：通过按钮找到它的父级行容器并移除
+    function deleteRow(btn) {
+        // btn.parentElement 是 cell，btn.parentElement.parentElement 是 row-item
+        const row = btn.closest('.row-item');
+        row.remove();
+    }
+</script>
+</body>
+</html>

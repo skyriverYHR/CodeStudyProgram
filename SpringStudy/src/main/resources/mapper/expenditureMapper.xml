@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="io.github.skyriverYHR.mapper.DailyExpenseRecordsMapper">
+    <!--  插入一条数据  -->
+    <insert id="insert">
+        INSERT INTO
+            daily_expense_records
+        (
+            expense_date,
+            regular_meals,
+            daily_necessities,
+            electronic_products,
+            snacks,examination_fee,
+            other_expenses,
+            summary
+        )
+        VALUES
+            (
+                #{expense_date},
+                #{regular_meals},
+                #{daily_necessities},
+                #{electronic_products},
+                #{snacks},
+                #{examination_fee},
+                #{other_expenses},
+                #{summary}
+            );
+    </insert>
+    <!--更新已有的一条数据-->
+    <update id="update">
+        UPDATE daily_expense_records
+        <set>
+            <if test="expense_data != null">expense_date = #{expense_data},</if>
+            <if test="regular_meals != null">regular_meals = #{regular_meals},</if>
+            <if test="daily_necessities != null">daily_necessities = #{daily_necessities},</if>
+            <if test="electronic_products != null">electronic_products = #{electronic_products},</if>
+            <if test="snacks != null">snacks = #{snacks},</if>
+            <if test="examination_fee != null">examination_fee = #{examination_fee},</if>
+            <if test="other_expenses != null">other_expenses = #{other_expenses},</if>
+            <if test="summary != null">summary = #{summary}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+    <!--删除一条数据-->
+    <delete id="delete">
+        DELETE FROM
+            daily_expense_records
+        WHERE
+            record_id = #{id}
+    </delete>
+    <!--删除多条数据-->
+    <delete id ="delectById">
+        DELETE FROM
+        daily_expense_records
+        WHERE record_id
+        in
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>;
+    </delete>
+    <!--查询所有数据-->
+    <select id="selectAllDailyExpenseRecords" resultType="io.github.skyriverYHR.entity.model.dailyExpense.DailyExpenseRecords">
+        SELECT
+            *
+        FROM
+            daily_expense_records;
+    </select>
+</mapper>

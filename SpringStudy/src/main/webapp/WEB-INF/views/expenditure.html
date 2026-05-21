@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Expense Tracker</title>
+    <link rel="stylesheet"
+          href="../css/dailyExpenseRecords.css"
+          th:href="@{/css/dailyExpenseRecords.css}">
+</head>
+<body>
+
+<div class="container">
+    <h2>Daily Expense Records</h2>
+
+    <!-- 插入数据表单 -->
+    <div class="card">
+        <h3>新增记录</h3>
+        <form th:action="@{/addExpense}" method="post" class="expense-form">
+            <div class="form-grid">
+                <input type="date" name="expense_date" required placeholder="日期">
+                <input type="number" step="0.01" name="regular_meals" placeholder="常规餐饮">
+                <input type="number" step="0.01" name="daily_necessities" placeholder="日用品">
+                <input type="number" step="0.01" name="electronic_products" placeholder="电子产品">
+                <input type="number" step="0.01" name="snacks" placeholder="零食">
+                <input type="number" step="0.01" name="examination_fee" placeholder="考试费用">
+                <input type="number" step="0.01" name="other_expenses" placeholder="其他">
+            </div>
+            <button type="submit" class="btn-add" id="insert">插入数据</button>
+            <button type="submit" class="btn-add" id="update">修改数据</button>
+        </form>
+    </div>
+
+    <!-- 数据展示表格 -->
+    <div class="card">
+        <h3>开销列表</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>日期</th>
+                <th>餐饮</th>
+                <th>日用</th>
+                <th>数码</th>
+                <th>零食</th>
+                <th>考试</th>
+                <th>其他</th>
+                <th>小计</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- 此处为 Thymeleaf 循环框架 -->
+            <tr th:each="record : ${records}">
+                <td th:text="${record.expense_date}">2026-04-30</td>
+                <td th:text="${record.regular_meals}">0.00</td>
+                <td th:text="${record.daily_necessities}">0.00</td>
+                <td th:text="${record.electronic_products}">0.00</td>
+                <td th:text="${record.snacks}">0.00</td>
+                <td th:text="${record.examination_fee}">0.00</td>
+                <td th:text="${record.other_expenses}">0.00</td>
+                <td th:text="${record.summary}" class="text-bold">0.00</td>
+                <td>
+                    <!-- 删除功能框架 -->
+                    <a th:href="@{/deleteExpense/{id}(id=${record.record_id})}" class="btn-delete">删除</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
