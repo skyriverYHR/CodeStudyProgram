@@ -1,4 +1,4 @@
-package Stcak.AdjacentElimination;
+package stack;
 
 import java.util.Stack;
 
