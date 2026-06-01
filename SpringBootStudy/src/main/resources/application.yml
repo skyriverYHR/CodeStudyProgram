@@ -1,0 +1,24 @@
+# 项目应用名称
+spring:
+  application:
+    name: SpringBootStudy
+
+  # 1. MySQL 数据库连接设置
+  datasource:
+    url: jdbc:mysql://localhost:3306/expenditure
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+# 2. MyBatis 设置
+mybatis-plus:
+  # 扫描实体类包
+  type-aliases-package: io.github.skyriveryhr.springbootstudy.entity
+
+# 3. 自定义随机值/业务配置
+school:
+  name: SkyRiver Academy
+
+my:
+  name: sky
+  id: 1
