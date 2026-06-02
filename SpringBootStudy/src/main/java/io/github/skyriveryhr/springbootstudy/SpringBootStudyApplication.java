@@ -1,5 +1,6 @@
 package io.github.skyriveryhr.springbootstudy;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,6 +15,8 @@ import java.util.Stack;
  */
 @RestController
 @SpringBootApplication
+//**扫描所有子包
+@MapperScan("io.github.skyriveryhr.springbootstudy.mapper.**")
 public class SpringBootStudyApplication {
     @Value("${school.name}")
     String name;

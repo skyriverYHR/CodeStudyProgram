@@ -5,21 +5,20 @@ import io.github.skyriveryhr.springbootstudy.mapper.expenditure.DailyExpenseReco
 import io.github.skyriveryhr.springbootstudy.service.expenditure.DailyExpenseRecordsService;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Service
 public class DailyExpenseRecordsImpl implements DailyExpenseRecordsService {
 
     private final DailyExpenseRecordsMapper dailyExpenseRecordsMapper;
-
+// 构造器注入
     public DailyExpenseRecordsImpl(DailyExpenseRecordsMapper dailyExpenseRecordsMapper) {
         this.dailyExpenseRecordsMapper = dailyExpenseRecordsMapper;
     }
 
     @Override
-    public List<DailyExpenseRecord> searchInformation() {
-//        警告在数据过多时严重影响运行，需配合分页查询
-        List<DailyExpenseRecord> records = dailyExpenseRecordsMapper.selectAll();
-        return records;
+    public DailyExpenseRecord searchInformation() {
+    //警告在数据过多时严重影响运行，需配合分页查询
+        DailyExpenseRecord record = dailyExpenseRecordsMapper.selectById(1L);
+        return record;
     }
 }

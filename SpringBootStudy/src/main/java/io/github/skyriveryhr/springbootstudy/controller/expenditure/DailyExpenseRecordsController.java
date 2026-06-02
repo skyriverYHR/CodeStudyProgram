@@ -17,7 +17,7 @@ public class DailyExpenseRecordsController {
     }
 
     @GetMapping("/dailyExpenseRecords")
-    public List<DailyExpenseRecord> getDailyExpenseRecords() {
+    public DailyExpenseRecord getDailyExpenseRecords() {
         return dailyExpenseRecordsService.searchInformation();
     }
 
